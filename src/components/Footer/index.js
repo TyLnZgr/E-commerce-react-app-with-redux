@@ -1,7 +1,7 @@
 import React from "react";
 //Mui
 import { makeStyles } from "@mui/styles";
-import { Button } from "@mui/material";
+import { Button, useMediaQuery, useTheme } from "@mui/material";
 //Png
 import n from "../../utils/assets/nW.png";
 import t from "../../utils/assets/tW.png";
@@ -12,7 +12,7 @@ import facebook from "../../utils/assets/facebook.png";
 import instagram from "../../utils/assets/instagram.png";
 import linkedin from "../../utils/assets/linkedin.png";
 //components
-import Title from "./components/Title";
+/* import Title from "./components/Title"; */
 
 const useStyles = makeStyles(() => ({
   footer: {
@@ -26,10 +26,11 @@ const useStyles = makeStyles(() => ({
   firstRow: {
     display: "flex",
     justifyContent: "space-between",
-    marginBottom: 55,
+    marginBottom: ({ firstMarginBot }) => firstMarginBot,
+    width: "100%",
   },
   footerLeftSide: {
-    width: "35%",
+    width: ({ firstRowWidth }) => firstRowWidth,
     display: "flex",
     flexDirection: "column",
     marginLeft: 20,
@@ -47,13 +48,13 @@ const useStyles = makeStyles(() => ({
   },
   search: {
     height: 38,
-    width: "70%",
+    width: "60%",
     border: "1px solid #000",
     position: "relative",
     borderRight: 0,
   },
   footerRightSide: {
-    display: "flex",
+    display: ({ rightSideDisplay }) => rightSideDisplay,
     alignItems: "center",
     justifyContent: "space-around",
     width: "50%",
@@ -67,7 +68,7 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-around",
-    marginTop: 40,
+    marginTop: 20,
   },
   info: {
     color: "#fff",
@@ -76,9 +77,34 @@ const useStyles = makeStyles(() => ({
   socialIcon: {
     marginLeft: 20,
   },
+  header: {
+    fontSize: 24,
+    color: "#fff",
+    fontWeight: 500,
+    marginTop: "15px",
+  },
+  subHeaderDiv: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginTop: 15,
+  },
+  subHeader: {
+    color: "#fff",
+    fontSize: 18,
+    marginTop: 15,
+  },
 }));
 function Footer() {
-  const classes = useStyles();
+  const theme = useTheme();
+  const tabletScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const mobileScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const props = {
+    firstRowWidth: tabletScreen ? "50%" : mobileScreen ? "100%" : "35%",
+    rightSideDisplay: mobileScreen ? "none" : "flex",
+    firstMarginBot: mobileScreen ? 0 : 55,
+  };
+  const classes = useStyles(props);
   return (
     <footer className={classes.footer}>
       <div className={classes.firstRow}>
@@ -106,7 +132,7 @@ function Footer() {
             Lorem ipsum dolor sit amet. Nam aliquam expedita in aliquid Quis aut
             autem enim qui consequatur quae
           </p>
-          <div className={classes.searchBox}>
+          <div className={classes.searchBox} style={{ width: "100%" }}>
             <input
               type="text"
               name=""
@@ -117,10 +143,11 @@ function Footer() {
             <Button
               variant="contained"
               sx={{
-                width: 100,
+                width: "30%",
                 height: 38,
                 backgroundColor: "#00254F",
                 textTransform: "capitalize",
+                fontSize: mobileScreen ? 8 : tabletScreen ? 10 : 14,
               }}
             >
               Sign Up
@@ -128,9 +155,36 @@ function Footer() {
           </div>
         </div>
         <div className={classes.footerRightSide}>
+          {/* <Title />
           <Title />
-          <Title />
-          <Title />
+          <Title /> */}
+          <div>
+            <h3 className={classes.header}>Title</h3>
+            <div className={classes.subHeaderDiv}>
+              <span className={classes.subHeader}>SubTitle</span>
+              <span className={classes.subHeader}>SubTitle</span>
+              <span className={classes.subHeader}>SubTitle</span>
+              <span className={classes.subHeader}>SubTitle</span>
+            </div>
+          </div>
+          <div style={{ display: tabletScreen ? "none" : "" }}>
+            <h3 className={classes.header}>Title</h3>
+            <div className={classes.subHeaderDiv}>
+              <span className={classes.subHeader}>SubTitle</span>
+              <span className={classes.subHeader}>SubTitle</span>
+              <span className={classes.subHeader}>SubTitle</span>
+              <span className={classes.subHeader}>SubTitle</span>
+            </div>
+          </div>
+          <div style={{ display: tabletScreen ? "none" : "" }}>
+            <h3 className={classes.header}>Title</h3>
+            <div className={classes.subHeaderDiv}>
+              <span className={classes.subHeader}>SubTitle</span>
+              <span className={classes.subHeader}>SubTitle</span>
+              <span className={classes.subHeader}>SubTitle</span>
+              <span className={classes.subHeader}>SubTitle</span>
+            </div>
+          </div>
         </div>
       </div>
       <div className={classes.path}></div>

@@ -7,7 +7,8 @@ import {
 } from "../../../../redux/Products/ProductsSlice";
 //Mui
 import { makeStyles } from "@mui/styles";
-import { Button } from "@mui/material";
+import { Button, useTheme, useMediaQuery } from "@mui/material";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 //png
 import favorite from "../../../../utils/assets/favorite.png";
 import likeImg from "../../../../utils/assets/like.png";
@@ -22,11 +23,12 @@ const useStyles = makeStyles(() => ({
   container: {
     display: "flex",
     flexDirection: "column",
+    marginBottom: 30,
   },
   link: {
     position: "absolute",
     width: "100%",
-    height: "100%",
+    height: "75%",
     top: 0,
     left: 0,
     textDecoration: "none",
@@ -39,17 +41,18 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    marginLeft: 150,
-    marginRight: 150,
+    marginLeft: 120,
+    marginRight: 120,
     marginBottom: 15,
   },
   containerProduct: {
     display: "flex",
     alignItems: "center",
     flexWrap: "wrap",
+    width: "100%",
     marginLeft: 140,
     marginRight: 140,
-    marginBottom: 15,
+    marginBottom: 30,
   },
   likedProdcts: {
     display: "flex",
@@ -66,7 +69,7 @@ const useStyles = makeStyles(() => ({
   },
   proPrice: {
     display: "block",
-    width: 265,
+    width: "98%",
     backgroundColor: "#E6EEF8",
     color: "#00254F",
   },
@@ -111,6 +114,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 function Products() {
+  const theme = useTheme();
+  const mobileScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const tableScreen = useMediaQuery(theme.breakpoints.down("md"));
   const dispatch = useDispatch();
   const classes = useStyles();
   const isLoading = useSelector((state) => state.products.isLoading);
@@ -141,7 +147,9 @@ function Products() {
   return (
     <div className={classes.container}>
       <div className={classes.containerHeader}>
-        <h1>Content title goes here</h1>
+        <h1 style={{ fontSize: mobileScreen ? 16 : tableScreen ? 24 : 32 }}>
+          Content title goes here
+        </h1>
         <div className={classes.likedProdcts}>
           <img src={favorite} alt="Favorite icon" height={18} width={20} />
           <span>{favoriteItems.length} Ürün</span>
@@ -164,8 +172,8 @@ function Products() {
                 <img
                   src={product?.imageUrl}
                   alt="product Image"
-                  width={260}
-                  height={180}
+                  width={"99%"}
+                  height={"50%"}
                 />
                 <span className={classes.proHeader}>{product?.name}</span>
                 <span className={classes.proPrice}>
@@ -207,8 +215,8 @@ function Products() {
                 <img
                   src={product?.imageUrl}
                   alt="product Image"
-                  width={260}
-                  height={180}
+                  width={"98%"}
+                  height={"30%"}
                 />
                 <span className={classes.proHeader}>{product?.name}</span>
                 <span className={classes.proPrice}>
@@ -245,6 +253,19 @@ function Products() {
               </Card>
             ))}
       </div>
+      <Button
+        variant="contained"
+        endIcon={<ArrowRightAltIcon color="white" />}
+        sx={{
+          width: 195,
+          height: 50,
+          margin: "0 auto",
+          textTransform: "capitalize",
+          display: mobileScreen ? "none" : "",
+        }}
+      >
+        Daha Fazla
+      </Button>
     </div>
   );
 }

@@ -2,6 +2,16 @@ import React from "react";
 //Mui
 import { makeStyles } from "@mui/styles";
 import SearchIcon from "@mui/icons-material/Search";
+import {
+  Button,
+  useMediaQuery,
+  useTheme,
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 //Png
 import n from "../../utils/assets/n.png";
 import t from "../../utils/assets/t.png";
@@ -9,18 +19,18 @@ import d from "../../utils/assets/d.png";
 import a from "../../utils/assets/a_1_.png";
 //React-Select
 import Select from "react-select";
-import { Button } from "@mui/material";
+
 const useStyles = makeStyles(() => ({
   header: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: ({ justifyContentHeader }) => justifyContentHeader,
     width: "100%",
     backgroundColor: "#fff",
-    padding: 20,
+    padding: ({ paddingHeader }) => paddingHeader,
   },
   favIcon: {
-    display: "flex",
+    display: ({ displayFavIcon }) => displayFavIcon,
     marginLeft: 20,
   },
   favIconImg: {
@@ -32,20 +42,22 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-evenly",
-    width: "60%",
-    marginRight: 200,
+    width: ({ searchBoxWidt }) => searchBoxWidt,
+    marginRight: ({ marginRightSearch }) => marginRightSearch,
+    marginLeft: 5,
   },
   search: {
     borderRadius: 4,
-    height: 40,
+    height: 38,
     padding: 5,
-    width: "70%",
+    width: "75%",
     border: "1px solid #000",
     position: "relative",
-    borderRight: 0,
+    borderRight: ({ borderRight }) => borderRight,
   },
   select: {
     position: "absolute",
+    display: ({ displaySelect }) => displaySelect,
   },
 }));
 const customStyles = {
@@ -85,7 +97,19 @@ const options = [
   { value: "5", label: "Category" },
 ];
 function Header() {
-  const classes = useStyles();
+  const theme = useTheme();
+  const mobileScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const props = {
+    justifyContentHeader: mobileScreen ? "center" : "space-around",
+    displaySelect: mobileScreen ? "none" : "",
+    paddingHeader: mobileScreen ? 2 : 20,
+    displayFavIcon: mobileScreen ? "none" : "flex",
+    searchBoxWidt: mobileScreen ? "100%" : "60%",
+    marginRightSearch: mobileScreen ? 0 : 200,
+    borderRight: mobileScreen ? "" : 0,
+  };
+  const classes = useStyles(props);
+
   return (
     <header className={classes.header}>
       <div className={classes.favIcon}>
@@ -111,9 +135,25 @@ function Header() {
           styles={customStyles}
           options={options}
         />
-        <Button variant="contained" sx={{ width: 110, height: 40 }}>
+        <Button
+          variant="contained"
+          sx={{ width: 110, height: 37, marginLeft: 2 }}
+        >
           <SearchIcon />
         </Button>
+        <div
+          style={{
+            display: mobileScreen ? "" : "none",
+          }}
+        >
+          <AppBar position="static" sx={{ backgroundColor: "#fff" }}>
+            <Toolbar variant="dense">
+              <IconButton edge="center" aria-label="menu">
+                <MenuIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+        </div>
       </div>
     </header>
   );

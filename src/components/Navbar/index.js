@@ -2,6 +2,7 @@ import React, { useState } from "react";
 //Mui
 import { makeStyles } from "@mui/styles";
 import Box from "@mui/material/Box";
+import { useMediaQuery, useTheme } from "@mui/material";
 //Dummy Data
 import { DUMMY_NAVBAR_ITEM } from "./data/data";
 //Png
@@ -9,7 +10,7 @@ import boxImage from "../../utils/assets/boxImage.png";
 const useStyles = makeStyles(() => ({
   navbar: {
     width: "100%",
-    display: "flex",
+    display: ({ displayNavbar }) => displayNavbar,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -37,9 +38,14 @@ const useStyles = makeStyles(() => ({
 }));
 
 function Navbar() {
+  const theme = useTheme();
+  const mobileScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const props = {
+    displayNavbar: mobileScreen ? "none" : "flex",
+  };
   const [isActive, setIsActive] = useState(false);
   const [openBox, setOpenBox] = useState(false);
-  const classes = useStyles();
+  const classes = useStyles(props);
   return (
     <nav className={classes.navbar}>
       <ul className={classes.list}>
@@ -49,7 +55,7 @@ function Navbar() {
             className={classes.listItem}
             onClick={() => {
               setIsActive(`active${item?.id}item`);
-              setOpenBox(true);
+              setOpenBox(!openBox);
             }}
             style={{
               borderBottom:

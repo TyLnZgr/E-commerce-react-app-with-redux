@@ -10,7 +10,7 @@ const images = [{ url: slider }, { url: slider2 }, { url: slider3 }];
 const useStyles = makeStyles(() => ({
   backdrop: {
     position: "absolute",
-    bottom: 165,
+    bottom: 0,
     width: "100%",
     height: 58,
     background: "rgba(0, 0, 0, 0.4)",
@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
 function Slider() {
   const classes = useStyles();
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <SimpleImageSlider
         width="100%"
         height={450}
