@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 //Mui
 import { makeStyles } from "@mui/styles";
 import SearchIcon from "@mui/icons-material/Search";
@@ -19,7 +19,9 @@ import d from "../../utils/assets/d.png";
 import a from "../../utils/assets/a_1_.png";
 //React-Select
 import Select from "react-select";
-
+//data
+import { DUMMY_NAVBAR_ITEM } from "../Navbar/data/data";
+import zIndex from "@mui/material/styles/zIndex";
 const useStyles = makeStyles(() => ({
   header: {
     display: "flex",
@@ -58,6 +60,12 @@ const useStyles = makeStyles(() => ({
   select: {
     position: "absolute",
     display: ({ displaySelect }) => displaySelect,
+  },
+  listItem: {
+    fontSize: 14,
+    cursor: "pointer",
+    paddingBottom: 7,
+    listStyleType: "none",
   },
 }));
 const customStyles = {
@@ -109,7 +117,7 @@ function Header() {
     borderRight: mobileScreen ? "" : 0,
   };
   const classes = useStyles(props);
-
+  const [openNavbar, setOpenNavbar] = useState(false);
   return (
     <header className={classes.header}>
       <div className={classes.favIcon}>
@@ -141,10 +149,11 @@ function Header() {
         >
           <SearchIcon />
         </Button>
-        <div
+        <Box
           style={{
             display: mobileScreen ? "" : "none",
           }}
+          onClick={() => setOpenNavbar(true)}
         >
           <AppBar position="static" sx={{ backgroundColor: "#fff" }}>
             <Toolbar variant="dense">
@@ -153,8 +162,33 @@ function Header() {
               </IconButton>
             </Toolbar>
           </AppBar>
-        </div>
+        </Box>
       </div>
+      {openNavbar && (
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            backgroundColor: "#FFF",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            zIndex: 200,
+          }}
+        >
+          {DUMMY_NAVBAR_ITEM?.map((item) => (
+            <li
+              key={item.id}
+              className={classes.listItem}
+              onClick={() => {
+                setOpenNavbar(false);
+              }}
+            >
+              {item.name}
+            </li>
+          ))}
+        </div>
+      )}
     </header>
   );
 }

@@ -132,7 +132,10 @@ function Footer() {
             Lorem ipsum dolor sit amet. Nam aliquam expedita in aliquid Quis aut
             autem enim qui consequatur quae
           </p>
-          <div className={classes.searchBox} style={{ width: "100%" }}>
+          <div
+            className={classes.searchBox}
+            style={{ width: "100%", marginBottom: mobileScreen ? 10 : "" }}
+          >
             <input
               type="text"
               name=""
@@ -191,7 +194,7 @@ function Footer() {
       <div className={classes.secondRow}>
         <span className={classes.info}>contact@nttdata.com</span>
         <span className={classes.info}>+3 9876 765 444</span>
-        <div>
+        <div style={{ display: mobileScreen ? "none" : "" }}>
           <img src={instagram} alt="Instagram" className={classes.socialIcon} />
           <img src={facebook} alt="Instagram" className={classes.socialIcon} />
           <img src={linkedin} alt="Instagram" className={classes.socialIcon} />
