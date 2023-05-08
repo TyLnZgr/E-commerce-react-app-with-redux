@@ -55,7 +55,7 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
     justifyContent: "space-between",
     width: 170,
-    marginLeft: 150,
+    marginLeft: ({ leftLike }) => leftLike,
   },
   proHeader: {
     display: "block",
@@ -115,7 +115,10 @@ function Products() {
   const mobileScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const tableScreen = useMediaQuery(theme.breakpoints.down("md"));
   const dispatch = useDispatch();
-  const classes = useStyles();
+  const props = {
+    leftLike: mobileScreen ? 10 : 150,
+  };
+  const classes = useStyles(props);
   const isLoading = useSelector((state) => state.products.isLoading);
   const products = useSelector((state) => state.products.items);
   const favoriteItems = useSelector((state) => state.products.favoriteItems);
@@ -145,7 +148,11 @@ function Products() {
   return (
     <div className={classes.container}>
       <div className={classes.containerHeader}>
-        <h1 style={{ fontSize: mobileScreen ? 16 : tableScreen ? 24 : 32 }}>
+        <h1
+          style={{
+            fontSize: mobileScreen ? 16 : tableScreen ? 24 : 32,
+          }}
+        >
           Content title goes here
         </h1>
         <div className={classes.likedProdcts}>
@@ -165,6 +172,58 @@ function Products() {
         {!screenFavoriteScreen
           ? showMoreProduct
             ? products?.map((product, index) => (
+                <Card
+                  className={classes.card}
+                  key={product.id}
+                  style={{ display: showMoreProduct ? "" : "none" }}
+                >
+                  <a href="http://www.google.com" className={classes.link} />
+                  <img
+                    src={product?.imageUrl}
+                    alt="product Image"
+                    width={"99%"}
+                    height={"50%"}
+                  />
+                  <span className={classes.proHeader}>{product?.name}</span>
+                  <span className={classes.proPrice}>
+                    {currencyFormat(Number(product?.price))} TL
+                  </span>
+                  <span className={classes.proDes}>Description</span>
+                  <p className={classes.description}>
+                    {readMore
+                      ? tableScreen
+                        ? product?.description?.slice(0, 10)
+                        : product?.description?.slice(0, 50)
+                      : product?.description}
+                    <span
+                      onClick={showFullDescriptionHandler}
+                      className={classes.readMore}
+                    >
+                      {readMore ? "...Devamını gör" : " Kısalt"}
+                    </span>
+                  </p>
+                  <span style={{ fontSize: 10 }}>
+                    {product?.shippingMethod}
+                  </span>
+                  <div className={classes.likeProduct}>
+                    <img
+                      src={isFavorite[product.id] ? likeRed : likeImg}
+                      alt="Like"
+                      className={classes.like}
+                      onClick={() => {
+                        handleFavorite(product.id);
+                        if (isFavorite[product.id]) {
+                          handleRemoveFavorite(product?.id);
+                        } else {
+                          handleAddFavorite(product);
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              ))
+            : mobileScreen
+            ? products.slice(0, 1)?.map((product, index) => (
                 <Card
                   className={classes.card}
                   key={product.id}
@@ -320,7 +379,6 @@ function Products() {
           height: 50,
           margin: "0 auto",
           textTransform: "capitalize",
-          display: mobileScreen ? "none" : "",
         }}
         onClick={() => setShowMoreProduct(!showMoreProduct)}
       >

@@ -6,6 +6,7 @@ import slider3 from "../../utils/assets/slider3.png";
 import slider4 from "../../utils/assets/slider4.png";
 //Mui
 import { makeStyles } from "@mui/styles";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 const images = [
   { url: slider },
@@ -24,12 +25,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 function Slider() {
+  const theme = useTheme();
+  const mobileScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useStyles();
   return (
     <div style={{ position: "relative" }}>
       <SimpleImageSlider
         width="100%"
-        height={450}
+        height={mobileScreen ? 250 : 450}
         images={images}
         showBullets={true}
         showNavs={true}
