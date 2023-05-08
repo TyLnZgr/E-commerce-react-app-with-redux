@@ -6,7 +6,6 @@ import {
   removeFavoriteItems,
 } from "../../../../redux/Products/ProductsSlice";
 //Mui
-import { makeStyles } from "@mui/styles";
 import { Button, useTheme, useMediaQuery } from "@mui/material";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 //png
@@ -18,98 +17,9 @@ import currencyFormat from "../../../../helpers/currencyFormat";
 //Shared Components
 import Loader from "../../../../components/Shared/Loader";
 import Card from "../../../../components/Shared/Card";
+//css
+import { useStyles } from "./styles/ProductsStyles";
 
-const useStyles = makeStyles(() => ({
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    marginBottom: 30,
-  },
-  link: {
-    position: "absolute",
-    width: "100%",
-    height: "75%",
-    top: 0,
-    left: 0,
-    textDecoration: "none",
-    zIndex: 10,
-    backgroundColor: "#FFF",
-    opacity: 0,
-    filter: "alpha((opacity = 1))",
-  },
-  containerHeader: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-around",
-    marginBottom: 15,
-  },
-  containerProduct: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexWrap: "wrap",
-    marginBottom: 30,
-  },
-  likedProdcts: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: 170,
-    marginLeft: ({ leftLike }) => leftLike,
-  },
-  proHeader: {
-    display: "block",
-    fontSize: 16,
-    fontWeight: 600,
-    marginBottom: 8,
-    marginTop: 5,
-  },
-  proPrice: {
-    display: "block",
-    width: "98%",
-    backgroundColor: "#E6EEF8",
-    color: "#00254F",
-  },
-  proDes: {
-    display: "block",
-    fontSize: 12,
-    fontWeight: 600,
-    marginTop: 8,
-  },
-  description: {
-    fontSize: 12,
-    color: "#00254F",
-  },
-  readMore: {
-    marginLeft: 5,
-    color: "blue",
-    textDecoration: "underline",
-    letterSpacing: "1px",
-    cursor: "pointer",
-  },
-  likeProduct: {
-    position: "absolute",
-    top: 20,
-    right: 20,
-    width: 24,
-    height: 24,
-    background: "#FFFFFF",
-    borderRadius: 36,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    zIndex: 24,
-  },
-  card: {
-    position: "relative",
-  },
-  like: {
-    marginTop: 2,
-    cursor: "pointer",
-    width: 14,
-    height: 14,
-  },
-}));
 function Products() {
   const theme = useTheme();
   const mobileScreen = useMediaQuery(theme.breakpoints.down("sm"));

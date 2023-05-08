@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 //Mui
-import { makeStyles } from "@mui/styles";
 import Box from "@mui/material/Box";
 import { useMediaQuery, useTheme } from "@mui/material";
 //Dummy Data
@@ -9,62 +8,8 @@ import { DUMMY_NAVBAR_ITEM } from "./data/data";
 import boxImage from "../../../../utils/assets/boxImage.png";
 import expandLess from "../../../../utils/assets/expandLess.png";
 import expandMore from "../../../../utils/assets/expandMore.png";
-const useStyles = makeStyles(() => ({
-  navbar: {
-    width: "100%",
-    display: ({ displayNavbar }) => displayNavbar,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  list: {
-    width: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-evenly",
-    listStyleType: "none",
-  },
-  listItem: {
-    fontSize: 14,
-    cursor: "pointer",
-    paddingBottom: 7,
-  },
-  boxContainer: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-  boxHeader: { display: "flex", flexDirection: "column", marginLeft: 15 },
-  boxSpan: {
-    marginBottom: 7,
-    fontSize: 14,
-  },
-  dropdown: {
-    listStyleType: "none",
-    textDecoration: "none",
-    fontSize: 16,
-    display: "block",
-    color: "#000",
-    position: "relative",
-    marginLeft: "-15px",
-  },
-  listItem: {
-    position: "relative",
-    display: "block",
-    backgroundColor: "#F4F5F6",
-    marginBottom: 5,
-  },
-  listBox: {
-    position: "absolute",
-    display: ({ displayDropdown }) => displayDropdown,
-    top: 30,
-    left: 10,
-    width: 100,
-    border: "1px solid #e2e2e2",
-    backgroundColor: "#F4F5F6",
-    zIndex: 100,
-    padding: 2,
-    textAlign: "center",
-  },
-}));
+//css
+import { useStyles } from "./styles/NavbarStyles";
 
 function Navbar() {
   const theme = useTheme();
