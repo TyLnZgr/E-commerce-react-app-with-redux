@@ -3,10 +3,16 @@ import SimpleImageSlider from "react-simple-image-slider";
 import slider from "../../utils/assets/slider.png";
 import slider2 from "../../utils/assets/slider2.png";
 import slider3 from "../../utils/assets/slider3.png";
+import slider4 from "../../utils/assets/slider4.png";
 //Mui
 import { makeStyles } from "@mui/styles";
 
-const images = [{ url: slider }, { url: slider2 }, { url: slider3 }];
+const images = [
+  { url: slider },
+  { url: slider2 },
+  { url: slider3 },
+  { url: slider4 },
+];
 const useStyles = makeStyles(() => ({
   backdrop: {
     position: "absolute",
@@ -26,7 +32,7 @@ function Slider() {
         height={450}
         images={images}
         showBullets={true}
-        showNavs={false}
+        showNavs={true}
         autoPlay={true}
       />
       <div className={classes.backdrop}></div>

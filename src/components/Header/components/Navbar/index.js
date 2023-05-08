@@ -6,7 +6,7 @@ import { useMediaQuery, useTheme } from "@mui/material";
 //Dummy Data
 import { DUMMY_NAVBAR_ITEM } from "./data/data";
 //Png
-import boxImage from "../../utils/assets/boxImage.png";
+import boxImage from "../../../../utils/assets/boxImage.png";
 const useStyles = makeStyles(() => ({
   navbar: {
     width: "100%",
@@ -40,9 +40,7 @@ const useStyles = makeStyles(() => ({
 function Navbar() {
   const theme = useTheme();
   const mobileScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const props = {
-    displayNavbar: mobileScreen ? "none" : "flex",
-  };
+  const props = {};
   const [isActive, setIsActive] = useState(false);
   const [openBox, setOpenBox] = useState(false);
   const classes = useStyles(props);

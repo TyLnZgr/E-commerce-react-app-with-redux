@@ -20,17 +20,17 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "#0059BC",
     display: "flex",
     flexDirection: "column",
+    justifyContent: "space-around",
     width: "100%",
     padding: 35,
   },
   firstRow: {
     display: "flex",
-    justifyContent: "space-between",
-    marginBottom: ({ firstMarginBot }) => firstMarginBot,
+    justifyContent: "space-evenly",
     width: "100%",
   },
   footerLeftSide: {
-    width: ({ firstRowWidth }) => firstRowWidth,
+    width: "35%",
     display: "flex",
     flexDirection: "column",
     marginLeft: 20,
@@ -44,17 +44,17 @@ const useStyles = makeStyles(() => ({
     marginLeft: 2,
   },
   searchBox: {
-    marginTop: 40,
+    marginTop: 30,
   },
   search: {
     height: 38,
-    width: "60%",
+    width: "65%",
     border: "1px solid #000",
     position: "relative",
     borderRight: 0,
   },
   footerRightSide: {
-    display: ({ rightSideDisplay }) => rightSideDisplay,
+    display: "flex",
     alignItems: "center",
     justifyContent: "space-around",
     width: "50%",
@@ -67,8 +67,7 @@ const useStyles = makeStyles(() => ({
   secondRow: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-around",
-    marginTop: 20,
+    justifyContent: "space-between",
   },
   info: {
     color: "#fff",
@@ -87,7 +86,6 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginTop: 15,
   },
   subHeader: {
     color: "#fff",
@@ -99,11 +97,7 @@ function Footer() {
   const theme = useTheme();
   const tabletScreen = useMediaQuery(theme.breakpoints.down("md"));
   const mobileScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const props = {
-    firstRowWidth: tabletScreen ? "50%" : mobileScreen ? "100%" : "35%",
-    rightSideDisplay: mobileScreen ? "none" : "flex",
-    firstMarginBot: mobileScreen ? 0 : 55,
-  };
+  const props = {};
   const classes = useStyles(props);
   return (
     <footer className={classes.footer}>

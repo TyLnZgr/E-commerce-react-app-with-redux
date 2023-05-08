@@ -1,17 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 //Mui
 import { makeStyles } from "@mui/styles";
 import SearchIcon from "@mui/icons-material/Search";
-import {
-  Button,
-  useMediaQuery,
-  useTheme,
-  AppBar,
-  Box,
-  Toolbar,
-  IconButton,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import { Button, useMediaQuery, useTheme } from "@mui/material";
 //Png
 import n from "../../utils/assets/n.png";
 import t from "../../utils/assets/t.png";
@@ -19,20 +10,25 @@ import d from "../../utils/assets/d.png";
 import a from "../../utils/assets/a_1_.png";
 //React-Select
 import Select from "react-select";
-//data
-import { DUMMY_NAVBAR_ITEM } from "../Navbar/data/data";
-import zIndex from "@mui/material/styles/zIndex";
+import Navbar from "./components/Navbar";
+
 const useStyles = makeStyles(() => ({
   header: {
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
-    justifyContent: ({ justifyContentHeader }) => justifyContentHeader,
     width: "100%",
     backgroundColor: "#fff",
-    padding: ({ paddingHeader }) => paddingHeader,
+  },
+  firstRow: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around",
+    marginBottom: 10,
+    marginTop: 10,
   },
   favIcon: {
-    display: ({ displayFavIcon }) => displayFavIcon,
     marginLeft: 20,
   },
   favIconImg: {
@@ -44,9 +40,7 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-evenly",
-    width: ({ searchBoxWidt }) => searchBoxWidt,
-    marginRight: ({ marginRightSearch }) => marginRightSearch,
-    marginLeft: 5,
+    width: "60%",
   },
   search: {
     borderRadius: 4,
@@ -55,11 +49,10 @@ const useStyles = makeStyles(() => ({
     width: "75%",
     border: "1px solid #000",
     position: "relative",
-    borderRight: ({ borderRight }) => borderRight,
+    borderRight: 0,
   },
   select: {
     position: "absolute",
-    display: ({ displaySelect }) => displaySelect,
   },
   listItem: {
     fontSize: 14,
@@ -74,8 +67,8 @@ const customStyles = {
     background: "#D9D9D9",
     border: "1px solid #000",
     borderLeft: "1px solid #D9D9D9",
-    marginLeft: "-15px",
     boxShadow: "none",
+    marginLeft: "-15px",
   }),
   indicatorSeparator: (base) => ({
     ...base,
@@ -107,88 +100,44 @@ const options = [
 function Header() {
   const theme = useTheme();
   const mobileScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const props = {
-    justifyContentHeader: mobileScreen ? "center" : "space-around",
-    displaySelect: mobileScreen ? "none" : "",
-    paddingHeader: mobileScreen ? 2 : 20,
-    displayFavIcon: mobileScreen ? "none" : "flex",
-    searchBoxWidt: mobileScreen ? "100%" : "60%",
-    marginRightSearch: mobileScreen ? 0 : 200,
-    borderRight: mobileScreen ? "" : 0,
-  };
+  const props = {};
   const classes = useStyles(props);
-  const [openNavbar, setOpenNavbar] = useState(false);
   return (
     <header className={classes.header}>
-      <div className={classes.favIcon}>
-        <img src={n} alt="N" className={classes.favIconImg} />
-        <img src={t} alt="T" className={classes.favIconImg} />
-        <img src={t} alt="T" className={classes.favIconImg} />
-        <img src={d} alt="D" className={classes.favIconImg} />
-        <img src={a} alt="A" className={classes.favIconImg} />
-        <img src={t} alt="T" className={classes.favIconImg} />
-        <img src={a} alt="A" className={classes.favIconImg} />
-      </div>
-      <div className={classes.searchBox}>
-        <input
-          type="text"
-          name=""
-          value=""
-          placeholder="Search.."
-          className={classes.search}
-        />
-        <Select
-          className={classes.select}
-          placeholder="Categories"
-          styles={customStyles}
-          options={options}
-        />
-        <Button
-          variant="contained"
-          sx={{ width: 110, height: 37, marginLeft: 2 }}
-        >
-          <SearchIcon />
-        </Button>
-        <Box
-          style={{
-            display: mobileScreen ? "" : "none",
-          }}
-          onClick={() => setOpenNavbar(true)}
-        >
-          <AppBar position="static" sx={{ backgroundColor: "#fff" }}>
-            <Toolbar variant="dense">
-              <IconButton edge="center" aria-label="menu">
-                <MenuIcon />
-              </IconButton>
-            </Toolbar>
-          </AppBar>
-        </Box>
-      </div>
-      {openNavbar && (
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            backgroundColor: "#FFF",
-            position: "absolute",
-            top: 0,
-            left: 0,
-            zIndex: 200,
-          }}
-        >
-          {DUMMY_NAVBAR_ITEM?.map((item) => (
-            <li
-              key={item.id}
-              className={classes.listItem}
-              onClick={() => {
-                setOpenNavbar(false);
-              }}
-            >
-              {item.name}
-            </li>
-          ))}
+      <div className={classes.firstRow}>
+        <div className={classes.favIcon}>
+          <img src={n} alt="N" className={classes.favIconImg} />
+          <img src={t} alt="T" className={classes.favIconImg} />
+          <img src={t} alt="T" className={classes.favIconImg} />
+          <img src={d} alt="D" className={classes.favIconImg} />
+          <img src={a} alt="A" className={classes.favIconImg} />
+          <img src={t} alt="T" className={classes.favIconImg} />
+          <img src={a} alt="A" className={classes.favIconImg} />
         </div>
-      )}
+        <div className={classes.searchBox}>
+          <input
+            type="text"
+            name=""
+            value=""
+            placeholder="Search.."
+            className={classes.search}
+          />
+          <Select
+            className={classes.select}
+            placeholder="Categories"
+            styles={customStyles}
+            options={options}
+          />
+          <Button
+            variant="contained"
+            sx={{ width: 110, height: 37, marginLeft: 2 }}
+          >
+            <SearchIcon />
+          </Button>
+        </div>
+      </div>
+      <div style={{ height: 1, width: "100%", background: "#89919A" }}></div>
+      <Navbar />
     </header>
   );
 }
