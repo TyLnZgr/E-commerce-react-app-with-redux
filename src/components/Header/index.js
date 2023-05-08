@@ -11,6 +11,7 @@ import a from "../../utils/assets/a_1_.png";
 //React-Select
 import Select from "react-select";
 import Navbar from "./components/Navbar";
+import { MobileNavbar } from "./components/MobileNavbar";
 
 const useStyles = makeStyles(() => ({
   header: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles(() => ({
     width: "100%",
     display: "flex",
     alignItems: "center",
+    flexDirection: ({ headerFlexDirection }) => headerFlexDirection,
     justifyContent: "space-around",
     marginBottom: 10,
     marginTop: 10,
@@ -40,16 +42,16 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-evenly",
-    width: "60%",
+    width: ({ searchBox }) => searchBox,
   },
   search: {
     borderRadius: 4,
     height: 38,
     padding: 5,
-    width: "75%",
+    width: ({ searchWidth }) => searchWidth,
     border: "1px solid #000",
     position: "relative",
-    borderRight: 0,
+    borderRight: ({ borderRight }) => borderRight,
   },
   select: {
     position: "absolute",
@@ -72,7 +74,6 @@ const customStyles = {
   }),
   indicatorSeparator: (base) => ({
     ...base,
-    display: "none",
   }),
   dropdownIndicator: (base) => ({
     ...base,
@@ -100,21 +101,39 @@ const options = [
 function Header() {
   const theme = useTheme();
   const mobileScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const props = {};
+  const props = {
+    headerFlexDirection: mobileScreen ? "column" : "row",
+    borderRight: mobileScreen ? "" : 0,
+    searchWidth: mobileScreen ? "90%" : "75%",
+    searchBox: mobileScreen ? "90%" : "60%",
+    firstRowJus: mobileScreen ? "space-between" : "space-around",
+  };
   const classes = useStyles(props);
   return (
     <header className={classes.header}>
       <div className={classes.firstRow}>
-        <div className={classes.favIcon}>
+        <div
+          className={classes.favIcon}
+          style={{ marginBottom: mobileScreen ? 13 : 0 }}
+        >
           <img src={n} alt="N" className={classes.favIconImg} />
           <img src={t} alt="T" className={classes.favIconImg} />
           <img src={t} alt="T" className={classes.favIconImg} />
           <img src={d} alt="D" className={classes.favIconImg} />
           <img src={a} alt="A" className={classes.favIconImg} />
           <img src={t} alt="T" className={classes.favIconImg} />
-          <img src={a} alt="A" className={classes.favIconImg} />
+          <img
+            src={a}
+            alt="A"
+            className={classes.favIconImg}
+            style={{ marginRight: mobileScreen ? 120 : 0 }}
+          />
+          {mobileScreen && <MobileNavbar />}
         </div>
-        <div className={classes.searchBox}>
+        <div
+          className={classes.searchBox}
+          style={{ marginBottom: mobileScreen ? 5 : 0 }}
+        >
           <input
             type="text"
             name=""
@@ -122,12 +141,14 @@ function Header() {
             placeholder="Search.."
             className={classes.search}
           />
-          <Select
-            className={classes.select}
-            placeholder="Categories"
-            styles={customStyles}
-            options={options}
-          />
+          {!mobileScreen && (
+            <Select
+              className={classes.select}
+              placeholder="Categories"
+              styles={customStyles}
+              options={options}
+            />
+          )}
           <Button
             variant="contained"
             sx={{ width: 110, height: 37, marginLeft: 2 }}
@@ -136,8 +157,14 @@ function Header() {
           </Button>
         </div>
       </div>
-      <div style={{ height: 1, width: "100%", background: "#89919A" }}></div>
-      <Navbar />
+      {!mobileScreen && (
+        <>
+          <div
+            style={{ height: 1, width: "100%", background: "#89919A" }}
+          ></div>
+          <Navbar />
+        </>
+      )}
     </header>
   );
 }

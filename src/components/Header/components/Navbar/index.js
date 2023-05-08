@@ -51,7 +51,6 @@ const useStyles = makeStyles(() => ({
     display: "block",
     backgroundColor: "#F4F5F6",
     marginBottom: 5,
-    "&:hover": {},
   },
   listBox: {
     position: "absolute",
@@ -78,7 +77,7 @@ function Navbar() {
   const [isActive, setIsActive] = useState(false);
   const [openBox, setOpenBox] = useState(false);
   const classes = useStyles(props);
-  let content = DUMMY_NAVBAR_ITEM?.map((item) => (
+  let contentDesktop = DUMMY_NAVBAR_ITEM?.map((item) => (
     <li
       key={item.id}
       className={classes.listItem}
@@ -94,101 +93,98 @@ function Navbar() {
       {item.name}
     </li>
   ));
-
+  let contentTablet = (
+    <>
+      <li
+        style={{
+          borderBottom: isActive ? "3px solid blue" : "",
+        }}
+        onClick={() => {
+          setIsActive(!isActive);
+          setOpenBox(!openBox);
+        }}
+      >
+        Menu Item
+      </li>
+      <li
+        style={{
+          borderBottom: isActive ? "3px solid blue" : "",
+        }}
+        onClick={() => {
+          setIsActive(!isActive);
+          setOpenBox(!openBox);
+        }}
+      >
+        Menu Item
+      </li>
+      <li
+        style={{
+          borderBottom: isActive ? "3px solid blue" : "",
+        }}
+        onClick={() => {
+          setIsActive(!isActive);
+          setOpenBox(!openBox);
+        }}
+      >
+        Menu Item
+      </li>
+      <li
+        style={{
+          borderBottom: isActive ? "3px solid blue" : "",
+        }}
+        onClick={() => {
+          setIsActive(!isActive);
+          setOpenBox(!openBox);
+        }}
+      >
+        Menu Item
+      </li>
+      <li
+        style={{
+          borderBottom: isActive ? "3px solid blue" : "",
+        }}
+        onClick={() => {
+          setIsActive(!isActive);
+          setOpenBox(!openBox);
+        }}
+      >
+        Menu Item
+      </li>
+      <li
+        style={{
+          borderBottom: isActive ? "3px solid blue" : " ",
+        }}
+        onClick={() => {
+          setIsActive(!isActive);
+          setOpenBox(!openBox);
+        }}
+      >
+        Menu Item
+      </li>
+      <ul className={classes.dropdown}>
+        <li
+          style={{ cursor: "pointer" }}
+          onClick={() => setOpenDropdown(!openDropdown)}
+        >
+          More{" "}
+          <img
+            src={!openDropdown ? expandMore : expandLess}
+            style={{ marginLeft: 2 }}
+            width={12}
+          />
+          <ul className={classes.listBox}>
+            <li className={classes.listItem}>Menu Item</li>
+            <li className={classes.listItem}>Menu Item</li>
+            <li className={classes.listItem}>Menu Item</li>
+          </ul>
+        </li>
+      </ul>
+    </>
+  );
   return (
     <nav className={classes.navbar}>
       <ul className={classes.list}>
-        {tableScreen ? (
-          <>
-            <li
-              style={{
-                borderBottom: isActive ? "3px solid blue" : "",
-              }}
-              onClick={() => {
-                setIsActive(!isActive);
-                setOpenBox(!openBox);
-              }}
-            >
-              Menu Item
-            </li>
-            <li
-              style={{
-                borderBottom: isActive ? "3px solid blue" : "",
-              }}
-              onClick={() => {
-                setIsActive(!isActive);
-                setOpenBox(!openBox);
-              }}
-            >
-              Menu Item
-            </li>
-            <li
-              style={{
-                borderBottom: isActive ? "3px solid blue" : "",
-              }}
-              onClick={() => {
-                setIsActive(!isActive);
-                setOpenBox(!openBox);
-              }}
-            >
-              Menu Item
-            </li>
-            <li
-              style={{
-                borderBottom: isActive ? "3px solid blue" : "",
-              }}
-              onClick={() => {
-                setIsActive(!isActive);
-                setOpenBox(!openBox);
-              }}
-            >
-              Menu Item
-            </li>
-            <li
-              style={{
-                borderBottom: isActive ? "3px solid blue" : "",
-              }}
-              onClick={() => {
-                setIsActive(!isActive);
-                setOpenBox(!openBox);
-              }}
-            >
-              Menu Item
-            </li>
-            <li
-              style={{
-                borderBottom: isActive ? "3px solid blue" : " ",
-              }}
-              onClick={() => {
-                setIsActive(!isActive);
-                setOpenBox(!openBox);
-              }}
-            >
-              Menu Item
-            </li>
-            <ul className={classes.dropdown}>
-              <li
-                style={{ cursor: "pointer" }}
-                onClick={() => setOpenDropdown(!openDropdown)}
-              >
-                More{" "}
-                <img
-                  src={!openDropdown ? expandMore : expandLess}
-                  style={{ marginLeft: 2 }}
-                  width={12}
-                />
-                <ul className={classes.listBox}>
-                  <li className={classes.listItem}>Menu Item</li>
-                  <li className={classes.listItem}>Menu Item</li>
-                  <li className={classes.listItem}>Menu Item</li>
-                </ul>
-              </li>
-            </ul>
-          </>
-        ) : (
-          content
-        )}
-
+        {tableScreen ? contentTablet : contentDesktop}
         {openBox && (
           <Box
             sx={{

@@ -15,7 +15,7 @@ import linkedin from "../../utils/assets/linkedin.png";
 /* import Title from "./components/Title"; */
 const useStyles = makeStyles(() => ({
   footer: {
-    height: 375,
+    height: ({ footerHeight }) => footerHeight,
     backgroundColor: "#0059BC",
     display: "flex",
     flexDirection: "column",
@@ -99,6 +99,7 @@ function Footer() {
   const props = {
     justify: mobileScreen ? "flex-start" : "space-evenly",
     widthLeftSide: mobileScreen ? "60%" : "35%",
+    footerHeight: mobileScreen ? 250 : 375,
   };
   const classes = useStyles(props);
   return (
@@ -123,6 +124,7 @@ function Footer() {
               marginTop: 25,
               fontWeight: 400,
               fontSize: 16,
+              display: mobileScreen ? "none" : "",
             }}
           >
             Lorem ipsum dolor sit amet. Nam aliquam expedita in aliquid Quis aut
