@@ -40,18 +40,14 @@ const useStyles = makeStyles(() => ({
   containerHeader: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
-    marginLeft: 120,
-    marginRight: 120,
+    justifyContent: "space-around",
     marginBottom: 15,
   },
   containerProduct: {
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
     flexWrap: "wrap",
-    width: "100%",
-    marginLeft: 140,
-    marginRight: 140,
     marginBottom: 30,
   },
   likedProdcts: {
@@ -59,6 +55,7 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
     justifyContent: "space-between",
     width: 170,
+    marginLeft: 150,
   },
   proHeader: {
     display: "block",
@@ -187,7 +184,9 @@ function Products() {
                   <span className={classes.proDes}>Description</span>
                   <p className={classes.description}>
                     {readMore
-                      ? product?.description?.slice(0, 50)
+                      ? tableScreen
+                        ? product?.description?.slice(0, 10)
+                        : product?.description?.slice(0, 50)
                       : product?.description}
                     <span
                       onClick={showFullDescriptionHandler}
@@ -236,7 +235,9 @@ function Products() {
                   <span className={classes.proDes}>Description</span>
                   <p className={classes.description}>
                     {readMore
-                      ? product?.description?.slice(0, 50)
+                      ? tableScreen
+                        ? product?.description?.slice(0, 10)
+                        : product?.description?.slice(0, 50)
                       : product?.description}
                     <span
                       onClick={showFullDescriptionHandler}
@@ -281,7 +282,9 @@ function Products() {
                 <span className={classes.proDes}>Description</span>
                 <p className={classes.description}>
                   {readMore
-                    ? product?.description?.slice(0, 50)
+                    ? tableScreen
+                      ? product?.description?.slice(0, 10)
+                      : product?.description?.slice(0, 50)
                     : product?.description}
                   <span
                     onClick={showFullDescriptionHandler}

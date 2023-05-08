@@ -13,24 +13,23 @@ import instagram from "../../utils/assets/instagram.png";
 import linkedin from "../../utils/assets/linkedin.png";
 //components
 /* import Title from "./components/Title"; */
-
 const useStyles = makeStyles(() => ({
   footer: {
-    height: 400,
+    height: 375,
     backgroundColor: "#0059BC",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-around",
     width: "100%",
-    padding: 35,
   },
   firstRow: {
     display: "flex",
-    justifyContent: "space-evenly",
+    justifyContent: ({ justify }) => justify,
     width: "100%",
+    marginTop: 30,
   },
   footerLeftSide: {
-    width: "35%",
+    width: ({ widthLeftSide }) => widthLeftSide,
     display: "flex",
     flexDirection: "column",
     marginLeft: 20,
@@ -57,7 +56,7 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-around",
-    width: "50%",
+    width: "40%",
   },
   path: {
     height: 2,
@@ -67,7 +66,7 @@ const useStyles = makeStyles(() => ({
   secondRow: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
   },
   info: {
     color: "#fff",
@@ -97,7 +96,10 @@ function Footer() {
   const theme = useTheme();
   const tabletScreen = useMediaQuery(theme.breakpoints.down("md"));
   const mobileScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const props = {};
+  const props = {
+    justify: mobileScreen ? "flex-start" : "space-evenly",
+    widthLeftSide: mobileScreen ? "60%" : "35%",
+  };
   const classes = useStyles(props);
   return (
     <footer className={classes.footer}>
@@ -151,7 +153,10 @@ function Footer() {
             </Button>
           </div>
         </div>
-        <div className={classes.footerRightSide}>
+        <div
+          className={classes.footerRightSide}
+          style={{ display: mobileScreen ? "none" : "" }}
+        >
           {/* <Title />
           <Title />
           <Title /> */}

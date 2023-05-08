@@ -1,9 +1,11 @@
 import React from "react";
 //Mui
 import { makeStyles } from "@mui/styles";
+import { useMediaQuery, useTheme } from "@mui/material";
+
 const useStyles = makeStyles(() => ({
   card: {
-    width: 290,
+    width: ({ cardWidth }) => cardWidth,
     padding: 15,
     background: "white",
     border: "1px solid #d7dad9",
@@ -15,7 +17,14 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Card = ({ className, children }) => {
-  const classes = useStyles();
+  const theme = useTheme();
+  const mobileScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const tableScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const props = {
+    cardWidth: mobileScreen ? 200 : tableScreen ? 144 : 260,
+  };
+  const classes = useStyles(props);
+
   return <div className={`${classes.card} ${className}`}>{children}</div>;
 };
 
