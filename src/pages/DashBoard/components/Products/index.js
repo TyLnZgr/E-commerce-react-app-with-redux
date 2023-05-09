@@ -79,170 +79,20 @@ function Products() {
         </div>
       </div>
       <div className={`${classes.containerProduct}`}>
-        {!screenFavoriteScreen
-          ? showMoreProduct
-            ? products?.map((product, index) => (
-                <Card
-                  className={classes.card}
-                  key={product.id}
-                  style={{ display: showMoreProduct ? "" : "none" }}
-                >
-                  <a href="http://www.google.com" className={classes.link} />
-                  <img
-                    src={product?.imageUrl}
-                    alt="product Image"
-                    width={"99%"}
-                    height={"50%"}
-                  />
-                  <span className={classes.proHeader}>{product?.name}</span>
-                  <span className={classes.proPrice}>
-                    {currencyFormat(Number(product?.price))} TL
-                  </span>
-                  <span className={classes.proDes}>Description</span>
-                  <p className={classes.description}>
-                    {readMore
-                      ? tableScreen
-                        ? product?.description?.slice(0, 10)
-                        : product?.description?.slice(0, 50)
-                      : product?.description}
-                    <span
-                      onClick={showFullDescriptionHandler}
-                      className={classes.readMore}
-                    >
-                      {readMore ? "...Devamını gör" : " Kısalt"}
-                    </span>
-                  </p>
-                  <span style={{ fontSize: 10 }}>
-                    {product?.shippingMethod}
-                  </span>
-                  <div className={classes.likeProduct}>
-                    <img
-                      src={isFavorite[product.id] ? likeRed : likeImg}
-                      alt="Like"
-                      className={classes.like}
-                      onClick={() => {
-                        handleFavorite(product.id);
-                        if (isFavorite[product.id]) {
-                          handleRemoveFavorite(product?.id);
-                        } else {
-                          handleAddFavorite(product);
-                        }
-                      }}
-                    />
-                  </div>
-                </Card>
-              ))
-            : mobileScreen
-            ? products.slice(0, 1)?.map((product, index) => (
-                <Card
-                  className={classes.card}
-                  key={product.id}
-                  style={{ display: showMoreProduct ? "" : "none" }}
-                >
-                  <a href="http://www.google.com" className={classes.link} />
-                  <img
-                    src={product?.imageUrl}
-                    alt="product Image"
-                    width={"99%"}
-                    height={"50%"}
-                  />
-                  <span className={classes.proHeader}>{product?.name}</span>
-                  <span className={classes.proPrice}>
-                    {currencyFormat(Number(product?.price))} TL
-                  </span>
-                  <span className={classes.proDes}>Description</span>
-                  <p className={classes.description}>
-                    {readMore
-                      ? tableScreen
-                        ? product?.description?.slice(0, 10)
-                        : product?.description?.slice(0, 50)
-                      : product?.description}
-                    <span
-                      onClick={showFullDescriptionHandler}
-                      className={classes.readMore}
-                    >
-                      {readMore ? "...Devamını gör" : " Kısalt"}
-                    </span>
-                  </p>
-                  <span style={{ fontSize: 10 }}>
-                    {product?.shippingMethod}
-                  </span>
-                  <div className={classes.likeProduct}>
-                    <img
-                      src={isFavorite[product.id] ? likeRed : likeImg}
-                      alt="Like"
-                      className={classes.like}
-                      onClick={() => {
-                        handleFavorite(product.id);
-                        if (isFavorite[product.id]) {
-                          handleRemoveFavorite(product?.id);
-                        } else {
-                          handleAddFavorite(product);
-                        }
-                      }}
-                    />
-                  </div>
-                </Card>
-              ))
-            : products.slice(0, 4)?.map((product, index) => (
-                <Card
-                  className={classes.card}
-                  key={product.id}
-                  style={{ display: showMoreProduct ? "" : "none" }}
-                >
-                  <a href="http://www.google.com" className={classes.link} />
-                  <img
-                    src={product?.imageUrl}
-                    alt="product Image"
-                    width={"99%"}
-                    height={"50%"}
-                  />
-                  <span className={classes.proHeader}>{product?.name}</span>
-                  <span className={classes.proPrice}>
-                    {currencyFormat(Number(product?.price))} TL
-                  </span>
-                  <span className={classes.proDes}>Description</span>
-                  <p className={classes.description}>
-                    {readMore
-                      ? tableScreen
-                        ? product?.description?.slice(0, 10)
-                        : product?.description?.slice(0, 50)
-                      : product?.description}
-                    <span
-                      onClick={showFullDescriptionHandler}
-                      className={classes.readMore}
-                    >
-                      {readMore ? "...Devamını gör" : " Kısalt"}
-                    </span>
-                  </p>
-                  <span style={{ fontSize: 10 }}>
-                    {product?.shippingMethod}
-                  </span>
-                  <div className={classes.likeProduct}>
-                    <img
-                      src={isFavorite[product.id] ? likeRed : likeImg}
-                      alt="Like"
-                      className={classes.like}
-                      onClick={() => {
-                        handleFavorite(product.id);
-                        if (isFavorite[product.id]) {
-                          handleRemoveFavorite(product?.id);
-                        } else {
-                          handleAddFavorite(product);
-                        }
-                      }}
-                    />
-                  </div>
-                </Card>
-              ))
-          : favoriteItems?.map((product, index) => (
-              <Card className={classes.card} key={product.id}>
+        {!screenFavoriteScreen ? (
+          showMoreProduct ? (
+            products?.map((product, index) => (
+              <Card
+                className={classes.card}
+                key={product.id}
+                style={{ display: showMoreProduct ? "" : "none" }}
+              >
                 <a href="http://www.google.com" className={classes.link} />
                 <img
                   src={product?.imageUrl}
                   alt="product Image"
-                  width={"98%"}
-                  height={"30%"}
+                  width={"99%"}
+                  height={"50%"}
                 />
                 <span className={classes.proHeader}>{product?.name}</span>
                 <span className={classes.proPrice}>
@@ -279,21 +129,173 @@ function Products() {
                   />
                 </div>
               </Card>
-            ))}
+            ))
+          ) : mobileScreen ? (
+            products.slice(0, 1)?.map((product, index) => (
+              <Card
+                className={classes.card}
+                key={product.id}
+                style={{ display: showMoreProduct ? "" : "none" }}
+              >
+                <a href="http://www.google.com" className={classes.link} />
+                <img
+                  src={product?.imageUrl}
+                  alt="product Image"
+                  width={"99%"}
+                  height={"50%"}
+                />
+                <span className={classes.proHeader}>{product?.name}</span>
+                <span className={classes.proPrice}>
+                  {currencyFormat(Number(product?.price))} TL
+                </span>
+                <span className={classes.proDes}>Description</span>
+                <p className={classes.description}>
+                  {readMore
+                    ? tableScreen
+                      ? product?.description?.slice(0, 10)
+                      : product?.description?.slice(0, 50)
+                    : product?.description}
+                  <span
+                    onClick={showFullDescriptionHandler}
+                    className={classes.readMore}
+                  >
+                    {readMore ? "...Devamını gör" : " Kısalt"}
+                  </span>
+                </p>
+                <span style={{ fontSize: 10 }}>{product?.shippingMethod}</span>
+                <div className={classes.likeProduct}>
+                  <img
+                    src={isFavorite[product.id] ? likeRed : likeImg}
+                    alt="Like"
+                    className={classes.like}
+                    onClick={() => {
+                      handleFavorite(product.id);
+                      if (isFavorite[product.id]) {
+                        handleRemoveFavorite(product?.id);
+                      } else {
+                        handleAddFavorite(product);
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            ))
+          ) : (
+            products.slice(0, 4)?.map((product, index) => (
+              <Card
+                className={classes.card}
+                key={product.id}
+                style={{ display: showMoreProduct ? "" : "none" }}
+              >
+                <a href="http://www.google.com" className={classes.link} />
+                <img
+                  src={product?.imageUrl}
+                  alt="product Image"
+                  width={"99%"}
+                  height={"50%"}
+                />
+                <span className={classes.proHeader}>{product?.name}</span>
+                <span className={classes.proPrice}>
+                  {currencyFormat(Number(product?.price))} TL
+                </span>
+                <span className={classes.proDes}>Description</span>
+                <p className={classes.description}>
+                  {readMore
+                    ? tableScreen
+                      ? product?.description?.slice(0, 10)
+                      : product?.description?.slice(0, 50)
+                    : product?.description}
+                  <span
+                    onClick={showFullDescriptionHandler}
+                    className={classes.readMore}
+                  >
+                    {readMore ? "...Devamını gör" : " Kısalt"}
+                  </span>
+                </p>
+                <span style={{ fontSize: 10 }}>{product?.shippingMethod}</span>
+                <div className={classes.likeProduct}>
+                  <img
+                    src={isFavorite[product.id] ? likeRed : likeImg}
+                    alt="Like"
+                    className={classes.like}
+                    onClick={() => {
+                      handleFavorite(product.id);
+                      if (isFavorite[product.id]) {
+                        handleRemoveFavorite(product?.id);
+                      } else {
+                        handleAddFavorite(product);
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            ))
+          )
+        ) : favoriteItems.length >= 1 ? (
+          favoriteItems?.map((product, index) => (
+            <Card className={classes.card} key={product.id}>
+              <a href="http://www.google.com" className={classes.link} />
+              <img
+                src={product?.imageUrl}
+                alt="product Image"
+                width={"98%"}
+                height={"30%"}
+              />
+              <span className={classes.proHeader}>{product?.name}</span>
+              <span className={classes.proPrice}>
+                {currencyFormat(Number(product?.price))} TL
+              </span>
+              <span className={classes.proDes}>Description</span>
+              <p className={classes.description}>
+                {readMore
+                  ? tableScreen
+                    ? product?.description?.slice(0, 10)
+                    : product?.description?.slice(0, 50)
+                  : product?.description}
+                <span
+                  onClick={showFullDescriptionHandler}
+                  className={classes.readMore}
+                >
+                  {readMore ? "...Devamını gör" : " Kısalt"}
+                </span>
+              </p>
+              <span style={{ fontSize: 10 }}>{product?.shippingMethod}</span>
+              <div className={classes.likeProduct}>
+                <img
+                  src={isFavorite[product.id] ? likeRed : likeImg}
+                  alt="Like"
+                  className={classes.like}
+                  onClick={() => {
+                    handleFavorite(product.id);
+                    if (isFavorite[product.id]) {
+                      handleRemoveFavorite(product?.id);
+                    } else {
+                      handleAddFavorite(product);
+                    }
+                  }}
+                />
+              </div>
+            </Card>
+          ))
+        ) : (
+          <p>Beğendiğiniz bir ürün bulunmamaktadır</p>
+        )}
       </div>
-      <Button
-        variant="contained"
-        endIcon={<ArrowRightAltIcon color="white" />}
-        sx={{
-          width: 195,
-          height: 50,
-          margin: "0 auto",
-          textTransform: "capitalize",
-        }}
-        onClick={() => setShowMoreProduct(!showMoreProduct)}
-      >
-        {!showMoreProduct ? "Daha Fazla" : "Daha Az"}
-      </Button>
+      {(favoriteItems.length >= 1 || !screenFavoriteScreen) && (
+        <Button
+          variant="contained"
+          endIcon={<ArrowRightAltIcon color="white" />}
+          sx={{
+            width: 195,
+            height: 50,
+            margin: "0 auto",
+            textTransform: "capitalize",
+          }}
+          onClick={() => setShowMoreProduct(!showMoreProduct)}
+        >
+          {!showMoreProduct ? "Daha Fazla" : "Daha Az"}
+        </Button>
+      )}
     </div>
   );
 }
