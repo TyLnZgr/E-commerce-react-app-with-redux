@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 //Mui
 
 import SearchIcon from "@mui/icons-material/Search";
@@ -14,6 +14,7 @@ import Navbar from "./components/Navbar";
 import { MobileNavbar } from "./components/MobileNavbar";
 //css
 import { customStyles, useStyles } from "./styles/HeaderStyles";
+
 const options = [
   { value: "1", label: "Data" },
   { value: "2", label: "Category" },
@@ -22,6 +23,7 @@ const options = [
   { value: "5", label: "Category" },
 ];
 function Header() {
+  const [searchProduct, setSearchProduct] = useState("");
   const theme = useTheme();
   const mobileScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const props = {
@@ -59,10 +61,11 @@ function Header() {
         >
           <input
             type="text"
-            name=""
-            value=""
+            name="Search"
+            value={searchProduct}
             placeholder="Search.."
             className={classes.search}
+            onChange={(e) => setSearchProduct(e.target.value)}
           />
           {!mobileScreen && (
             <Select
