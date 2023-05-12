@@ -8,7 +8,7 @@ export const useStyles = makeStyles(() => ({
   link: {
     position: "absolute",
     width: "100%",
-    height: "75%",
+    height: "60%",
     top: 0,
     left: 0,
     textDecoration: "none",

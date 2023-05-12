@@ -36,9 +36,6 @@ function Products() {
   const [isFavorite, setIsFavorite] = useState({});
   const [readMore, setReadMore] = useState({});
   const [showMoreProduct, setShowMoreProduct] = useState(false);
-  const showFullDescriptionHandler = () => {
-    setReadMore(!readMore);
-  };
   const handleAddFavorite = (product) => {
     dispatch(addFavoriteItems(product));
   };
@@ -60,7 +57,6 @@ function Products() {
   if (isLoading) {
     return <Loader />;
   }
-
   return (
     <div className={classes.container}>
       <div className={classes.containerHeader}>
