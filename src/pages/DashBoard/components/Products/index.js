@@ -34,7 +34,7 @@ function Products() {
   const favoriteItems = useSelector((state) => state.products.favoriteItems);
   const [screenFavoriteScreen, setScreenFavoriteScreen] = useState(false);
   const [isFavorite, setIsFavorite] = useState({});
-  const [readMore, setReadMore] = useState(true);
+  const [readMore, setReadMore] = useState({});
   const [showMoreProduct, setShowMoreProduct] = useState(false);
   const showFullDescriptionHandler = () => {
     setReadMore(!readMore);
@@ -49,6 +49,12 @@ function Products() {
     setIsFavorite({
       ...isFavorite,
       [id]: !isFavorite[id],
+    });
+  };
+  const handleaReadMore = (id) => {
+    setReadMore({
+      ...readMore,
+      [id]: !readMore[id],
     });
   };
   if (isLoading) {
@@ -100,16 +106,16 @@ function Products() {
                 </span>
                 <span className={classes.proDes}>Description</span>
                 <p className={classes.description}>
-                  {readMore
+                  {!readMore[product.id]
                     ? tableScreen
                       ? product?.description?.slice(0, 10)
                       : product?.description?.slice(0, 50)
                     : product?.description}
                   <span
-                    onClick={showFullDescriptionHandler}
+                    onClick={() => handleaReadMore(product.id)}
                     className={classes.readMore}
                   >
-                    {readMore ? "...Devamını gör" : " Kısalt"}
+                    {readMore[product.id] ? "Kısalt" : " ...Devamını gör"}
                   </span>
                 </p>
                 <span style={{ fontSize: 10 }}>{product?.shippingMethod}</span>
@@ -150,16 +156,16 @@ function Products() {
                 </span>
                 <span className={classes.proDes}>Description</span>
                 <p className={classes.description}>
-                  {readMore
+                  {!readMore[product.id]
                     ? tableScreen
                       ? product?.description?.slice(0, 10)
                       : product?.description?.slice(0, 50)
                     : product?.description}
                   <span
-                    onClick={showFullDescriptionHandler}
+                    onClick={() => handleaReadMore(product.id)}
                     className={classes.readMore}
                   >
-                    {readMore ? "...Devamını gör" : " Kısalt"}
+                    {readMore[product?.id] ? "Kısalt" : " ...Devamını gör"}
                   </span>
                 </p>
                 <span style={{ fontSize: 10 }}>{product?.shippingMethod}</span>
@@ -200,16 +206,16 @@ function Products() {
                 </span>
                 <span className={classes.proDes}>Description</span>
                 <p className={classes.description}>
-                  {readMore
+                  {!readMore[product.id]
                     ? tableScreen
                       ? product?.description?.slice(0, 10)
                       : product?.description?.slice(0, 50)
                     : product?.description}
                   <span
-                    onClick={showFullDescriptionHandler}
+                    onClick={() => handleaReadMore(product.id)}
                     className={classes.readMore}
                   >
-                    {readMore ? "...Devamını gör" : " Kısalt"}
+                    {readMore[product.id] ? "Kısalt" : " ...Devamını gör"}
                   </span>
                 </p>
                 <span style={{ fontSize: 10 }}>{product?.shippingMethod}</span>
@@ -247,16 +253,16 @@ function Products() {
               </span>
               <span className={classes.proDes}>Description</span>
               <p className={classes.description}>
-                {readMore
+                {!readMore[product.id]
                   ? tableScreen
                     ? product?.description?.slice(0, 10)
                     : product?.description?.slice(0, 50)
                   : product?.description}
                 <span
-                  onClick={showFullDescriptionHandler}
+                  onClick={() => handleaReadMore(product.id)}
                   className={classes.readMore}
                 >
-                  {readMore ? "...Devamını gör" : " Kısalt"}
+                  {readMore[product.id] ? "Kısalt" : " ...Devamını gör"}
                 </span>
               </p>
               <span style={{ fontSize: 10 }}>{product?.shippingMethod}</span>

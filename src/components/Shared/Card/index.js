@@ -13,6 +13,7 @@ const useStyles = makeStyles(() => ({
     marginBottom: 10,
     marginRight: 15,
     position: "relative",
+    minHeight: 375,
   },
 }));
 
