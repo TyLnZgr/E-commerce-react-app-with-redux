@@ -23,10 +23,6 @@ export const useStyles = makeStyles(() => ({
     justifyContent: "space-between",
   },
   boxHeader: { display: "flex", flexDirection: "column", marginLeft: 15 },
-  boxSpan: {
-    marginBottom: 7,
-    fontSize: 14,
-  },
   dropdown: {
     listStyleType: "none",
     textDecoration: "none",
@@ -40,7 +36,6 @@ export const useStyles = makeStyles(() => ({
     position: "relative",
     display: "block",
     backgroundColor: "#F4F5F6",
-    marginBottom: 5,
   },
   listBox: {
     position: "absolute",
