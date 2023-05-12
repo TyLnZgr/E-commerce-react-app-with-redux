@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 //Mui
-
 import SearchIcon from "@mui/icons-material/Search";
 import { Button, useMediaQuery, useTheme } from "@mui/material";
 //Png
@@ -14,7 +13,6 @@ import Navbar from "./components/Navbar";
 import { MobileNavbar } from "./components/MobileNavbar";
 //css
 import { customStyles, useStyles } from "./styles/HeaderStyles";
-
 const options = [
   { value: "1", label: "Data" },
   { value: "2", label: "Category" },

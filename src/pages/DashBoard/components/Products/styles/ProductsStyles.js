@@ -24,11 +24,13 @@ export const useStyles = makeStyles(() => ({
     marginBottom: 15,
   },
   containerProduct: {
+    alignSelf: "center",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexWrap: "wrap",
     marginBottom: 30,
+    maxWidth: 1300,
   },
   likedProdcts: {
     display: "flex",
